@@ -30,6 +30,7 @@ void app_cleanup()
     exited = true;
     std::cout << "cleaning up" << std::endl;
     sentry_shutdown();
+    std::cout << "done cleaning up" << std::endl;
 }
 
 int main(int argc, char* argv[])
@@ -38,35 +39,31 @@ int main(int argc, char* argv[])
 
     std::atomic<bool> shutdown_requested{false};
 
-#ifdef __linux__
-    // https://thomastrapp.com/blog/signal-handler-for-multithreaded-c++/
-    // Block signals in this thread and subsequently spawned threads
-    sigset_t sigset;
-    sigemptyset(&sigset);
-    sigaddset(&sigset, SIGINT);
-    sigaddset(&sigset, SIGTERM);
-    sigaddset(&sigset, SIGSEGV);
-    sigaddset(&sigset, SIGABRT);
-    pthread_sigmask(SIG_BLOCK, &sigset, nullptr);
-
-    auto signal_handler = std::async(std::launch::async, [&sigset, &shutdown_requested] {
-        int signum = 0;
-        sigwait(&sigset, &signum);
-        shutdown_requested.store(true);
-        return signum;
-    });
-#else
-    auto signal_handler = std::async(std::launch::async, [] { return 0; });
-#endif
-
-    std::set_terminate(app_cleanup);
-    std::atexit(app_cleanup);
-    std::at_quick_exit(app_cleanup);
-
     sentry_options_t *options = sentry_options_new();
     sentry_options_set_dsn(options, "https://6ae9408c92aa4fde82862d32ac9deba5@o504248.ingest.sentry.io/5591753");
     // sentry_options_set_release(options, "testapp@0.1.0");
     sentry_init(options);
+
+    #ifdef ASD__linux__
+        // https://thomastrapp.com/blog/signal-handler-for-multithreaded-c++/
+        // Block signals in this thread and subsequently spawned threads
+        sigset_t sigset;
+        sigemptyset(&sigset);
+        sigaddset(&sigset, SIGINT);
+        sigaddset(&sigset, SIGTERM);
+        sigaddset(&sigset, SIGSEGV);
+        sigaddset(&sigset, SIGABRT);
+        pthread_sigmask(SIG_BLOCK, &sigset, nullptr);
+
+        auto signal_handler = std::async(std::launch::async, [&sigset, &shutdown_requested] {
+            int signum = 0;
+            sigwait(&sigset, &signum);
+            shutdown_requested.store(true);
+            return signum;
+        });
+    #else
+        auto signal_handler = std::async(std::launch::async, [] { return 0; });
+    #endif
 
     CLI::App app{"testapp"};
 
@@ -111,16 +108,17 @@ int main(int argc, char* argv[])
         {
             // do some work
             std::this_thread::sleep_for(std::chrono::seconds(2));
-            std::cout << ".";
+            std::cerr << ".";
         }
 
         return shutdown_requested.load();
     });
 
-    int signum = signal_handler.get();
+    // int signum = signal_handler.get();
+    // std::cout << "received signal " << signal << std::endl;
+    // bool worker_result = main_worker.get();
+    // app_cleanup();
+    // std::this_thread::sleep_for(std::chrono::seconds(2));
     bool worker_result = main_worker.get();
-    std::cout << "received signal " << signal << " worker result " << worker_result << std::endl;
-    app_cleanup();
-    std::this_thread::sleep_for(std::chrono::seconds(2));
     return 0;
 }
