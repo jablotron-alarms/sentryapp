@@ -45,7 +45,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME sentry
     GITHUB_REPOSITORY getsentry/sentry-native
-    GIT_TAG 0.4.4
+    GIT_TAG 0.4.7
     OPTIONS
         "SENTRY_BACKEND breakpad"
 )
