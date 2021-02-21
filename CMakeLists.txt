@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 # create project
-project(testapp)
+project(sentryapp)
 
 # we require c++17 for this app
 set(CMAKE_CXX_STANDARD 17)
@@ -51,7 +51,7 @@ CPMAddPackage(
 )
 
 # add executable
-add_executable(testapp main.cpp)
+add_executable(sentryapp main.cpp)
 
 # link dependencies
-target_link_libraries(testapp CLI11 sentry)
+target_link_libraries(sentryapp CLI11 sentry)
