@@ -31,16 +31,10 @@ if(ENABLE_CCACHE)
   endif()
 endif()
 
+add_subdirectory(libs/CLI11)
+
 # add dependencies
 include(cmake/CPM.cmake)
-
-CPMAddPackage(
-    NAME CLI11
-    # the git repo takes quite a long time to clone, so we download the packaged version instead
-    URL https://github.com/CLIUtils/CLI11/archive/v1.8.0.zip
-    URL_HASH SHA256=fab4d010d5c3b0886e65f0dbe28ebccc9164e5b4d1a22ac1dc4c290cfd51d0aa
-    VERSION 1.8.0
-)
 
 CPMAddPackage(
     NAME sentry
