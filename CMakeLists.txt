@@ -32,20 +32,7 @@ if(ENABLE_CCACHE)
 endif()
 
 add_subdirectory(libs/CLI11)
+find_package(sentry REQUIRED)
 
-# add dependencies
-include(cmake/CPM.cmake)
-
-CPMAddPackage(
-    NAME sentry
-    GITHUB_REPOSITORY getsentry/sentry-native
-    GIT_TAG 0.4.7
-    OPTIONS
-        "SENTRY_BACKEND breakpad"
-)
-
-# add executable
 add_executable(sentryapp main.cpp)
-
-# link dependencies
-target_link_libraries(sentryapp CLI11 sentry)
+target_link_libraries(sentryapp CLI11 sentry::sentry pthread)
