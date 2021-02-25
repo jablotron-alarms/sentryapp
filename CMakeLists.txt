@@ -31,9 +31,9 @@ if(ENABLE_CCACHE)
   endif()
 endif()
 
-# add_subdirectory(libs/CLI11)
-# find_package(sentry REQUIRED)
+find_package(sentry REQUIRED)
 
+# add_subdirectory(libs/CLI11)
 # add_executable(sentryapp main.cpp)
 # target_link_libraries(sentryapp CLI11 sentry::sentry pthread)
 
