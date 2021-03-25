@@ -32,10 +32,6 @@ cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_PREFIX_PATH=/path/to/se
 cmake --build build --parallel
 ```
 
-You can than run any command that sentryapp example provides, such as:
-- `build/sentryapp crash`
-- `build/sentryapp capture-event`
-
 ## Uploading debug info files
 
 If you want to upload debug info files including sources, you need to split the debug info and use sentry-cli app to upload them to sentry servers.
@@ -54,3 +50,9 @@ If you want to upload debug info files including sources, you need to split the 
 
 5. Upload all debug info files to sentry server:
 `sentry-cli upload-dif --org jablotron-alarms --project testapp --wait build/sentryapp build/sentryapp.debug build/sentryapp.src.zip`
+
+## Capturing events
+
+Run any command that sentryapp example provides, such as:
+- `build/sentryapp crash`
+- `build/sentryapp capture-event`
