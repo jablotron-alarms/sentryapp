@@ -33,5 +33,9 @@ endif()
 
 find_package(sentry REQUIRED)
 
-add_executable(sentryapp example.c)
-target_link_libraries(sentryapp sentry::sentry pthread)
+add_subdirectory(libs/CLI11)
+add_executable(sentryapp main.cpp)
+target_link_libraries(sentryapp CLI11 sentry::sentry pthread)
+
+# add_executable(sentryapp example.c)
+# target_link_libraries(sentryapp sentry::sentry pthread)
