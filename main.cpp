@@ -40,7 +40,6 @@ int main(int argc, char* argv[])
     std::atomic<bool> shutdown_requested{false};
 
     sentry_options_t *options = sentry_options_new();
-    sentry_options_set_dsn(options, "https://6ae9408c92aa4fde82862d32ac9deba5@o504248.ingest.sentry.io/5591753");
     // sentry_options_set_release(options, "testapp@0.1.0");
     sentry_init(options);
 
