@@ -53,8 +53,6 @@ main(int argc, char **argv)
 {
     sentry_options_t *options = sentry_options_new();
 
-    sentry_options_set_dsn(options, "https://6ae9408c92aa4fde82862d32ac9deba5@o504248.ingest.sentry.io/5591753");
-
     // this is an example. for real usage, make sure to set this explicitly to
     // an app specific cache location.
     sentry_options_set_database_path(options, ".sentry-native");

@@ -54,5 +54,5 @@ If you want to upload debug info files including sources, you need to split the 
 ## Capturing events
 
 Run any command that sentryapp example provides, such as:
-- `build/sentryapp crash`
-- `build/sentryapp capture-event`
+- `env SENTRY_DSN=<your sentry dsn> build/sentryapp crash`
+- `env SENTRY_DSN=<your sentry dsn> build/sentryapp capture-event`
