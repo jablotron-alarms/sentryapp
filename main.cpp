@@ -29,7 +29,7 @@ void app_cleanup()
     
     exited = true;
     std::cout << "cleaning up" << std::endl;
-    sentry_shutdown();
+    sentry_close();
     std::cout << "done cleaning up" << std::endl;
 }
 
@@ -78,6 +78,6 @@ int main(int argc, char* argv[])
         throw std::runtime_error(except.value());
     }
 
-    sentry_shutdown();
+    sentry_close();
     return 0;
 }
