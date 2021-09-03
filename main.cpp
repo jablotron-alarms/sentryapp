@@ -35,7 +35,7 @@ void app_cleanup()
 
 int main(int argc, char* argv[])
 {
-    std::cout << "starting up" << std::endl;
+    std::cout << "starting up\n";
 
     std::atomic<bool> shutdown_requested{false};
 
