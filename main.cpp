@@ -54,6 +54,9 @@ int main(int argc, char* argv[])
     std::optional<std::string> log{std::nullopt};
     app.add_option("-l,--log", log, "Log with message");
 
+    bool abrt{false};
+    app.add_option("-a,--abort", abrt, "Abort");
+
     CLI11_PARSE(app, argc, argv);
 
     if (log)
@@ -64,6 +67,11 @@ int main(int argc, char* argv[])
             /*  logger */ "custom",
             /* message */ log.value().data()
         ));
+    }
+
+    if (abrt)
+    {
+        abort();
     }
 
     if (crash)
