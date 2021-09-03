@@ -84,8 +84,8 @@ find /usr/lib/debug/ -name "*.debug" | xargs sentry-cli upload-dif --org jablotr
 ldd build/sentryapp | grep -Po "=> \K.*(?= \()" | xargs sentry-cli upload-dif --org jablotron-alarms --project sentryapp --wait
 
 # now you can run build/sentryapp, crash it, send logs
-build/sentryapp --crash
-build/sentryapp --log hello
+SENTRY_DSN=yourdsn build/sentryapp --crash
+SENTRY_DSN=yourdsn build/sentryapp --log hello
 
 # issues show up in sentry.io ui correctly
 # but the crash does not display crash source location
