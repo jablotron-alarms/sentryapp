@@ -12,7 +12,7 @@ In order to build this you need to download sentry-native sdk and build it:
 git clone --recursive https://github.com/getsentry/sentry-native.git
 cd sentry-native
 # checkout latest released version
-git checkout 0.4.8
+git checkout 0.4.12
 # configure the sdk, specifying build directory
 cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
 # build the sdk
