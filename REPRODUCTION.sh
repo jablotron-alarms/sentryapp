@@ -2,6 +2,9 @@
 # this script shows how to setup sentry-native sdk, example test application
 # with all debug info needed for sentry.io to process it
 
+# this script is not meant to be executed directly, it just has .sh extension
+# for syntax highlighting
+
 # start docker with:
 # $ docker run --rm --name sentry_container -itd debian:11
 # $ docker attach sentry_container
@@ -47,7 +50,7 @@ cmake --build build
 
 # upload binary executable with debug symbols, including sources,
 # we do not care about spliting binary and  debug symbols for this test
-sentry-cli upload-dif --org jablotron-alarms --project sentryapp --include-sources --wait build/sentryap
+sentry-cli upload-dif --org jablotron-alarms --project sentryapp --include-sources --wait build/sentryapp
 
 # upload libsentry library and debug symbols,
 # we do not care about splitting library and debug symbols for this test
